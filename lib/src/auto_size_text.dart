@@ -32,6 +32,7 @@ class AutoSizeText extends StatefulWidget {
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
+    this.textHeightBehavior,
   })  : textSpan = null,
         super(key: key);
 
@@ -57,6 +58,7 @@ class AutoSizeText extends StatefulWidget {
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
+    this.textHeightBehavior,
   })  : data = null,
         super(key: key);
 
@@ -214,6 +216,12 @@ class AutoSizeText extends StatefulWidget {
   /// AutoSizeText(r'$$', semanticsLabel: 'Double dollars')
   /// ```
   final String? semanticsLabel;
+
+  /// Defines how the paragraph will apply TextStyle.height to the ascent of the
+  /// first line and descent of the last line.
+  ///
+  /// default ascent will be used.
+  final TextHeightBehavior? textHeightBehavior;
 
   @override
   _AutoSizeTextState createState() => _AutoSizeTextState();
@@ -383,6 +391,7 @@ class _AutoSizeTextState extends State<AutoSizeText> {
         maxLines: words.length,
         locale: widget.locale,
         strutStyle: widget.strutStyle,
+        textHeightBehavior: widget.textHeightBehavior,
       );
 
       wordWrapTextPainter.layout(maxWidth: constraints.maxWidth);
@@ -401,6 +410,7 @@ class _AutoSizeTextState extends State<AutoSizeText> {
       maxLines: maxLines,
       locale: widget.locale,
       strutStyle: widget.strutStyle,
+      textHeightBehavior: widget.textHeightBehavior,
     );
 
     textPainter.layout(maxWidth: constraints.maxWidth);
@@ -425,6 +435,7 @@ class _AutoSizeTextState extends State<AutoSizeText> {
         textScaleFactor: 1,
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
+        textHeightBehavior: widget.textHeightBehavior,
       );
     } else {
       return Text.rich(
@@ -440,6 +451,7 @@ class _AutoSizeTextState extends State<AutoSizeText> {
         textScaleFactor: fontSize / style.fontSize!,
         maxLines: maxLines,
         semanticsLabel: widget.semanticsLabel,
+        textHeightBehavior: widget.textHeightBehavior,
       );
     }
   }
